@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/joho/godotenv"
 )
 
 type Config struct {
@@ -17,6 +18,9 @@ type Config struct {
 
 func LoadConfig() Config {
 
+	if err := godotenv.Load(); err != nil {
+		fmt.Println(".ENV File not found")
+	}
 	configApp := Config{}
 	env := os.Getenv("ENVIRONMENT")
 	configApp.PortApp = os.Getenv("PORT")
